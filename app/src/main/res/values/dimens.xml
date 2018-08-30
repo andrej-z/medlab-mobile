@@ -1,0 +1,13 @@
+<resources>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="loginTextSize">24sp</dimen>
+    <dimen name="BigText">20sp</dimen>
+    <dimen name="NormalText">16sp</dimen>
+    <dimen name="SmallText">12sp</dimen>
+    <dimen name="ChartSize">100dp</dimen>
+    <dimen name="RequestMargin">8dp</dimen>
+    <dimen name="fast_scroll_overlay_text_size">100dp</dimen>
+    <dimen name="digit_width">40dp</dimen>
+    <dimen name="google_1x">8dp</dimen>
+
+</resources>

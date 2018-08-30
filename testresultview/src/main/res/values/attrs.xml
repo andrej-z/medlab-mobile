@@ -1,0 +1,13 @@
+<resources>
+    <declare-styleable name="TestResultViewBase">
+        <attr name="LowLimit" format="float" />
+        <attr name="HighLimit" format="float" />
+        <attr name="ResultValue" format="float" />
+        <attr name="ChartHeight" format="integer" />
+        <attr name="LimitFontSize" format="dimension" />
+        <attr name="ResultFontSize" format="dimension" />
+        <attr name="PassedColor" format="color" />
+        <attr name="FailedColor" format="color" />
+        <attr name="Dimension" format="string" />
+    </declare-styleable>
+</resources>

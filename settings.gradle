@@ -1,0 +1,2 @@
+include ':app', ':testresultview', ':data_client', ':sms-auth'
+project(':data_client').projectDir = new File('data-client')
