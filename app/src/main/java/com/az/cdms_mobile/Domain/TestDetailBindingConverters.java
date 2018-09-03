@@ -1,19 +1,18 @@
 package com.az.cdms_mobile.Domain;
 
-import android.content.Context;
+
 import android.databinding.BindingAdapter;
+import android.support.v4.content.ContextCompat;
 import android.view.View;
-import android.widget.ImageButton;
+
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.az.cdms_mobile.Models.Request;
+import com.az.cdms_mobile.CdmsMobileApplication;
+import com.az.cdms_mobile.Common.Util;
 import com.az.cdms_mobile.Models.Test;
 import com.az.cdms_mobile.Models.TestResult;
 import com.az.cdms_mobile.R;
-import com.az.cdms_mobile.Repository.TestRepository;
-import com.az.testresultview.TestResultViewBase;
-
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.List;
@@ -26,10 +25,11 @@ public class TestDetailBindingConverters {
     @BindingAdapter("bindResultIcon")
     public  static void setRequestNumber(ImageView ImgView, Test t){
 
-       if (t.getResult() == TestResult.Passed)
-           ImgView.setImageDrawable(ImgView.getResources().getDrawable(R.drawable.ic_smile_good));
-       else if  (t.getResult() == TestResult.Failed)
-            ImgView.setImageDrawable(ImgView.getResources().getDrawable(R.drawable.ic_smile_bad));
+    if (t.getResult() == TestResult.Passed) {
+        ImgView.setImageResource(R.drawable.ic_smile_good);
+    } else if (t.getResult() == TestResult.Failed)
+        ImgView.setImageResource(R.drawable.ic_smile_bad);
+
     }
 
     @BindingAdapter("bindResultValue")

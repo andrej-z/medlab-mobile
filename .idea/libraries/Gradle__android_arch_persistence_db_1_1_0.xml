@@ -1,8 +1,8 @@
 <component name="libraryTable">
   <library name="Gradle: android.arch.persistence:db-1.1.0">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/db-1.1.0.aar/8bd366e75d95f5c2d9f67588b9e2e502/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/db-1.1.0.aar/8bd366e75d95f5c2d9f67588b9e2e502/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/db-1.1.0.aar/509b7061cd7122cb491c5d356f68a031/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/db-1.1.0.aar/509b7061cd7122cb491c5d356f68a031/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

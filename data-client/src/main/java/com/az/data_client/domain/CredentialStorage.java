@@ -37,6 +37,8 @@ public class CredentialStorage {
         preferences = context.getApplicationContext().getSharedPreferences("cdms_mobile", MODE_PRIVATE);
         Login = decrypt(preferences.getString(encrypt(login), ""));
         Password = decrypt(preferences.getString(encrypt(pass), ""));
+        Login = "92048125-faa4-4293-bee9-c43dee171c2f";
+        Password = "DiIgQK24(L]sCD]Xz^J[O/tC(&BSN>GnO&H[";
         SessionKey = decrypt(preferences.getString(encrypt(sessionKey), ""));
         long ticks = preferences.getLong(encrypt(sessionKeyDate),0);
         if (ticks>0)

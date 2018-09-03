@@ -25,7 +25,7 @@ import az.com.smsauth.LogonActivity;
 import io.reactivex.functions.Consumer;
 
 public class LoadingActivity extends AppCompatActivity {
-
+    boolean timerFired = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,14 +33,20 @@ public class LoadingActivity extends AppCompatActivity {
         //deleteDatabase("cdms");
 
 
-        final CountDownTimer timer = new CountDownTimer(3000,1000) {
+        final CountDownTimer timer = new CountDownTimer(30000,2000) {
             @Override
             public void onTick(long millisUntilFinished) {
-
+                if (AppContext.Get().dataService.getInitialized() && !timerFired) {
+                    this.cancel();
+                    this.onFinish();
+                    timerFired = true;
+                }
             }
 
             @Override
             public void onFinish() {
+                if (timerFired)
+                    return;
                 if (AppContext.Get().dataService.getAccountState() == AccountState.NotRegistered){
                     CallLoginActivity();
                     return;

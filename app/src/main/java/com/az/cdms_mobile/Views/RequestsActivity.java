@@ -74,7 +74,7 @@ SwipeRefreshLayout swipeRefreshLayout;
                 progressBar.setVisibility(View.GONE);
 
             }
-        }, new CallBackException()));
+        }, new CallBackException(progressBar)));
         SetupToolbar();
         SetupDrawer();
     }
@@ -196,7 +196,7 @@ swipeRefreshLayout.setRefreshing(false);
                 progressBar.setVisibility(View.GONE);
 
             }
-        }, new CallBackException()));
+        }, new CallBackException(progressBar)));
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

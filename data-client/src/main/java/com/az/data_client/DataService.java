@@ -137,18 +137,17 @@ public class DataService {
     private void saveUserInfo(UserInfo data) {
         dbUserInfo updateUserInfo = dbUserInfoMapper.MapUserToDb(data);
         db.userInfoDao().getUserInfo().subscribeOn(Schedulers.io())
-                .observeOn(Schedulers.newThread()).subscribe(new Consumer<dbUserInfo>() {
-            @Override
-            public void accept(dbUserInfo dbUserInfo) throws Exception {
-                if (dbUserInfo != null) {
-                    updateUserInfo.id = dbUserInfo.id;
-                    db.userInfoDao().update(updateUserInfo);
+                .observeOn(Schedulers.newThread())
+                .doOnEvent((dbUserInfo,error)->{
+                    if (dbUserInfo != null) {
+                        updateUserInfo.id = dbUserInfo.id;
+                        db.userInfoDao().update(updateUserInfo);
 
-                } else {
-                    db.userInfoDao().insert(updateUserInfo);
-                }
-            }
-        });
+                    } else {
+                        db.userInfoDao().insert(updateUserInfo);
+                    }
+                })
+                .subscribe();
     }
 
     private List<DataRequest> updateRequests(List<DataRequest> data) {
