@@ -135,7 +135,7 @@ SwipeRefreshLayout swipeRefreshLayout;
     private void SetupToolbar() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-       // getSupportActionBar().setTitle(request.FluidType.toString());
+        getSupportActionBar().setTitle("My requests");
        // getSupportActionBar().setSubtitle(DateFormat.getDateInstance(DateFormat.SHORT).format(request.FluidDate.toDate()));
         ActionBar actionbar = getSupportActionBar();
         actionbar.setDisplayHomeAsUpEnabled(true);

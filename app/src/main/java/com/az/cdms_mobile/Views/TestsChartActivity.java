@@ -34,6 +34,7 @@ import lecho.lib.hellocharts.model.AxisValue;
 import lecho.lib.hellocharts.model.Line;
 import lecho.lib.hellocharts.model.LineChartData;
 import lecho.lib.hellocharts.model.PointValue;
+import lecho.lib.hellocharts.model.Viewport;
 import lecho.lib.hellocharts.view.LineChartView;
 
 public class TestsChartActivity extends AppCompatActivity implements TestChartDataAdapter.TestClickListener {
@@ -82,11 +83,12 @@ public class TestsChartActivity extends AppCompatActivity implements TestChartDa
         List<Line> lines = new ArrayList<Line>();
         List<PointValue> values = new ArrayList<PointValue>();
         List<AxisValue> axisValues = new ArrayList<AxisValue>();
+        List<AxisValue> axisYValues = new ArrayList<AxisValue>();
         for(Test t:tests){
             PointValue v = new PointValue((float) t.FluidDate.getMillis(), t.Value.floatValue());
             v.setLabel(t.FluidDate.toString());
             values.add(v );
-
+            axisYValues.add(new AxisValue(v.getY()));
         }
         float middleValue = (values.get(0).getX() + values.get(values.size()-1).getX())/2;
         axisValues.add(new AxisValue(values.get(0).getX(),
@@ -107,15 +109,39 @@ public class TestsChartActivity extends AppCompatActivity implements TestChartDa
         Axis axisX = new Axis(axisValues);
 
 
-        Axis axisY = new Axis().setHasLines(true);
+        Axis axisY = new Axis(axisYValues);
 
 //            axisX.setName("Axis X");
 //            axisY.setName("Axis Y");
 
+        
         data.setAxisXBottom(axisX);
         data.setAxisYLeft(axisY);
+
         chart.setLineChartData(data);
+        setChartViewport(chart, values);
+
     }
+
+    private void setChartViewport(LineChartView chart, List<PointValue> values) {
+        final Viewport v = new Viewport(chart.getMaximumViewport());
+       float Ysize = v.top-v.bottom;
+       if (Ysize==0)
+           Ysize=1;
+       float Xsize = v.right-v.left;
+       float Ymargin = Ysize*0.05f;
+        float Xmargin = Xsize*0.05f;
+        v.top = v.top+Ymargin;
+        v.bottom = v.bottom-Ymargin;
+        v.left = v.left-Xmargin;
+        v.right = v.right+Xmargin;
+
+        chart.setMaximumViewport(v);
+        chart.setCurrentViewport(v);
+        chart.setViewportCalculationEnabled(false);
+
+    }
+
 
     @Override
     public void onItemClick(Request r) {
