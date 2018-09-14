@@ -2,11 +2,13 @@ package az.com.smsauth;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.AppCompatTextView;
+import android.support.v7.widget.Toolbar;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.Log;
@@ -41,22 +43,20 @@ public class LogonActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_logon);
-//        Button loginBtn = findViewById(R.id.login_btn);
-//        loginBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(getApplicationContext(), RequestsActivity.class);
-//                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//
-//                startActivity(intent);
-//            }
-//        });
-//        if (AppContext.Get().dataService.()){
-//            //show wait animation
-//            //show request activity if login successful
-//        }
+
         setUpUI();
+
+    }
+
+
+    private void setUpToolBar() {
+        Toolbar mToolBar = (Toolbar) findViewById(R.id.registration_toolbar);
+        mToolBar.setTitleTextColor(ContextCompat.getColor(mActivity, R.color.white));
+        setSupportActionBar(mToolBar);
+        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setTitle("Patient registration");
+
 
     }
 

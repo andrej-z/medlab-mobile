@@ -15,11 +15,12 @@
         android:allowBackup="true"
         android:icon="@drawable/logo"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:icon">
-        <activity android:name="az.com.smsauth.LogonActivity" />
+        <activity android:name="az.com.smsauth.LogonActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".Views.RequestsActivity"
             android:label="@string/title_activity_requests"
@@ -40,7 +41,8 @@
             android:name="az.com.smsauth.VerificationCodeActivity"
             android:label="VerificationCodeActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Views.LoadingActivity">
+        <activity android:name=".Views.LoadingActivity"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

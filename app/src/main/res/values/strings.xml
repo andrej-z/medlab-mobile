@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">cdms-mobile</string>
+    <string name="app_name">Mobile CDMS</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_requests">RequestsActivity</string>
     <string name="request">Request %s</string>
