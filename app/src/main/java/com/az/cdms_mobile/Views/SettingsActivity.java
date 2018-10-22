@@ -10,9 +10,11 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.EditTextPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
+import android.preference.SwitchPreference;
 import android.support.v7.app.ActionBar;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
@@ -22,6 +24,7 @@ import android.text.TextUtils;
 import android.view.MenuItem;
 
 import com.az.cdms_mobile.Domain.AppContext;
+import com.az.cdms_mobile.Domain.PasswordPreference;
 import com.az.cdms_mobile.R;
 
 import java.util.List;
@@ -165,7 +168,8 @@ if (preference== null)
     protected boolean isValidFragment(String fragmentName) {
         return PreferenceFragment.class.getName().equals(fragmentName)
                 || GeneralPreferenceFragment.class.getName().equals(fragmentName)
-                || DataSyncPreferenceFragment.class.getName().equals(fragmentName);
+                || DataSyncPreferenceFragment.class.getName().equals(fragmentName)
+                || SecurityPreferenceFragment.class.getName().equals(fragmentName);
     }
 
     @Override
@@ -276,6 +280,78 @@ if (preference== null)
                     return false;
                 }
             });
+        }
+
+        @Override
+        public boolean onOptionsItemSelected(MenuItem item) {
+            int id = item.getItemId();
+            if (id == android.R.id.home) {
+                startActivity(new Intent(getActivity(), SettingsActivity.class));
+                return true;
+            }
+            return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
+    public static class SecurityPreferenceFragment extends PreferenceFragment {
+        @Override
+        public void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            addPreferencesFromResource(R.xml.pref_datalock);
+            setHasOptionsMenu(true);
+
+            // Bind the summaries of EditText/List/Dialog/Ringtone preferences
+            // to their values. When their values change, their summaries are
+            // updated to reflect the new value, per the Android Design
+            // guidelines.
+            bindPreferenceToValue(findPreference("enable_pin"));
+            bindPreferenceToValue(findPreference("pin_password"));
+
+        }
+
+        private void bindPreferenceToValue(Preference p){
+            if (p== null)
+                return;
+            Preference.OnPreferenceChangeListener   protectedListener = new Preference.OnPreferenceChangeListener() {
+                @Override
+                public boolean onPreferenceChange(Preference preference, Object newValue) {
+                    String stringValue = newValue==null?"":newValue.toString();
+                    preference.setSummary(stringValue);
+                    if (p.getKey().equals("enable_pin") )
+                    {
+                        ((SwitchPreference)p).setChecked((boolean)newValue);
+                        if (!((SwitchPreference)p).isChecked()) {
+                            PasswordPreference pinPreference = (PasswordPreference) SecurityPreferenceFragment.this.findPreference("pin_password");
+                            pinPreference.setSummary("");
+                            AppContext.Get().dataService.updatePinProtection("");
+                        }
+                    }
+                    if (p.getKey().equals("pin_password")){
+                        if (stringValue ==null || stringValue.equals("")){
+                            SwitchPreference pinSwitchPreference = (SwitchPreference)SecurityPreferenceFragment.this.findPreference("enable_pin");
+
+                            pinSwitchPreference.setChecked(false);
+                            p.setSummary(stringValue);
+                        }else {
+                            p.setSummary("********");
+
+                        }
+
+                        AppContext.Get().dataService.updatePinProtection(stringValue);
+                    }
+                    return false;
+                }
+
+            };
+            p.setOnPreferenceChangeListener(protectedListener);
+            if (p.getKey().equals("enable_pin"))
+            protectedListener.onPreferenceChange(p,AppContext.Get().dataService.getPinProtectionEnabled());
+
+
+            // Trigger the listener immediately with the preference's
+            // current value.
+
         }
 
         @Override

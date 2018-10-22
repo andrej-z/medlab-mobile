@@ -1,0 +1,19 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <!-- NOTE: EditTextPreference accepts EditText attributes. -->
+    <!-- NOTE: EditTextPreference's summary should be set to its value by the activity code. -->
+    <SwitchPreference
+        android:defaultValue="true"
+
+        android:key="enable_pin"
+        android:title="Protect program with PIN" />
+
+
+    <com.az.cdms_mobile.Domain.PasswordPreference
+
+        android:key="pin_password"
+        android:selectable="true"
+        android:dependency="enable_pin"
+        android:title="@string/pin" />
+</PreferenceScreen>

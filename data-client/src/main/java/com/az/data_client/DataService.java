@@ -134,6 +134,18 @@ public class DataService {
         apiClient.register(googleAuthToken, callback);
     }
 
+    public void updatePinProtection(String value){
+        storage.UpdatePinProtection(value);
+    }
+
+    public boolean getPinProtectionEnabled() {
+        return storage.PinProtection.PinProtectionEnabled;
+    }
+
+    public boolean validatePin(String pin){
+        return storage.validatePin(pin);
+    }
+
     private void saveUserInfo(UserInfo data) {
         dbUserInfo updateUserInfo = dbUserInfoMapper.MapUserToDb(data);
         db.userInfoDao().getUserInfo().subscribeOn(Schedulers.io())

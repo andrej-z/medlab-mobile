@@ -105,6 +105,7 @@ public class ApiClient {
                     MobileRegistrationResult registrationResult = new MobileRegistrationResult(x);
                     if (registrationResult.result == RegistrationResult.Success){
                         storage.UpdateCredentials(registrationResult);
+                        storage.UpdatePinProtection(storage.PinProtection.Pin);
                     }
                     return registrationResult;
                 })

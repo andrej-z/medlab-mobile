@@ -1,2 +1,2 @@
-include ':app', ':testresultview', ':data_client', ':sms-auth'
+include ':app', ':testresultview', ':data_client', ':sms-auth', ':green_progressbar'
 project(':data_client').projectDir = new File('data-client')

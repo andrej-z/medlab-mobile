@@ -55,5 +55,6 @@ dependencies {
     implementation project(':testresultview')
     compile project(path: ':data_client')
     compile project(path: ':sms-auth')
+    compile project(path: ':green_progressbar')
 }
 apply plugin: 'com.google.gms.google-services'
